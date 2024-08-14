@@ -1,0 +1,110 @@
+
+:root {
+    --body-color:#f4f4f9;
+    --btn-primary: #278cf9d5;
+    --btn-secondary: #e1a900;
+    --btn-secondary-hover: #4a90e2;
+    --btn-primary-hover : #006ee3;
+}
+
+* {
+    box-sizing: border-box;
+    font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+}
+
+body {
+    margin: 0;
+    padding: 0;
+    background-color: var(--body-color);
+}
+
+.container {
+    background-color: white;
+    max-width: 600px;
+    margin: 0 auto;
+    box-shadow: 0 0 10px rgba(0,0,0, 0.1);
+    padding:20px;
+    margin-top:10px;
+}
+
+h1 {
+    text-align: center;
+}
+
+#todoInput {
+    width: 75%;
+    padding: 10px;
+    margin-right: 10px;
+    border: 2px solid #ddd;
+    border-radius: 5px;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    -ms-border-radius: 5px;
+    -o-border-radius: 5px;
+}
+
+#btn-addTodo {
+    padding:10px 20px;
+    background-color:var(--btn-primary);
+    border:none;
+    border-radius: 5px;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    -ms-border-radius: 5px;
+    -o-border-radius: 5px;
+    color: white;
+    font-weight:bold;
+    /* Button hover styling */
+    &:hover {
+        background-color: var(--btn-primary-hover);
+        font-weight: bolder;
+        cursor:pointer;
+    }
+}
+
+ul {
+    list-style-type: none;
+    padding:0;
+}
+
+li {
+    padding:10px;
+    border-bottom: 1px solid #ddd;
+    &:last-child {
+        border-bottom:none;
+    } /* Nesting */
+    &:hover {
+        background-color: aliceblue;
+        cursor:pointer;
+    }
+}
+
+/* li:last-child {
+    border-bottom: none;
+} */
+
+.filterBtn {
+    margin: 5px;
+    padding: 10px 15px;
+    background-color: var(--btn-secondary);
+    border: none;
+    border-radius: 5px;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    -ms-border-radius: 5px;
+    -o-border-radius: 5px;
+    cursor:pointer;
+    color:white;
+    font-weight: bold;
+    transition: background-color 0.3s;
+    -webkit-transition: background-color 0.3s;
+    -moz-transition: background-color 0.3s;
+    -ms-transition: background-color 0.3s;
+    -o-transition: background-color 0.3s;
+
+    &:hover {
+        background-color: var(--btn-secondary-hover);
+        font-weight: bolder;
+    }
+}
+
