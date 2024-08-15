@@ -4,23 +4,21 @@ function loadTodo() {
     return todo;
 }
 
-function addTodoToLocalStorage(todoText) {
-    const todo = loadTodo();
-    todo.todoList.push({
-        text: todoText,
-        isCompleted: false,
-    }
-    );
-    localStorage.setItem("todo", JSON.stringify(todo));
+function addTodoToLocalStorage(todo) {
+    const todos = loadTodo();
+    todos.todoList.push(todo);
+    localStorage.setItem("todo", JSON.stringify(todos));
 }
 
 function appendTodoInHtml(todo) {
     const todoList = document.getElementById('todoList');
     const todoItem = document.createElement('li');
-
+    todoItem.setAttribute
     const textDiv = document.createElement("div");
 
     textDiv.textContent = todo.text;
+    // console.log(todo);
+    // console.log(todo.text);
     todoItem.classList.add('todoItem');
 
     const wrapper = document.createElement("div");
@@ -53,13 +51,49 @@ document.addEventListener('DOMContentLoaded', () => {
     const input = document.getElementById("todoInput");
     const submit = document.getElementById("btn-addTodo");
     const todoList = document.getElementById("todoList");
+    const filterbtns = document.getElementsByClassName('filterBtn');
+
+    function executeFilterAction(event) {
+        const element = event.target;
+        const value = element.getAttribute('data-filter');
+        todoList.innerHTML = '';
+        const todos = loadTodo();
+        if (value === 'all') {
+            todos.todoList.forEach(todo => {
+                appendTodoInHtml(todo);
+            });
+        } else if (value === 'pending') {
+            todos.todoList.forEach(todo => {
+                if (todo.isCompleted !== true) {
+                    appendTodoInHtml(todo);
+                }
+            });
+        } else {
+            todos.todoList.forEach(todo => {
+                if (todo.isCompleted === true) {
+                    appendTodoInHtml(todo);
+                }
+            });
+        }
+    }
+
+    for (btn of filterbtns) {
+        btn.addEventListener('click', executeFilterAction);
+    }
+
     submit.addEventListener('click', (event) => {
+        const todos = loadTodo();
         const text = input.value;
         if (text === '') {
             alert('Please write something for the todo.');
         } else {
-            addTodoToLocalStorage(text);
-            appendTodoInHtml(text);
+            const todo = {
+                text: input.value,
+                isCompleted: false,
+                id: todos.todoList.length,
+            }
+            addTodoToLocalStorage(todo);
+            appendTodoInHtml(todo);
             input.value = '';
         }
     })
@@ -70,6 +104,7 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 
     input.addEventListener("keydown", (event) => {
+        const todos = loadTodo();
         if (event.key === 'Enter') {
             const text = input.value;
             if (text === '') {
@@ -79,6 +114,7 @@ document.addEventListener('DOMContentLoaded', () => {
                 const todo = {
                     text: input.value,
                     isCompleted: false,
+                    id: todos.todoList.length,
                 }
                 addTodoToLocalStorage(todo);
                 appendTodoInHtml(todo);
@@ -86,9 +122,7 @@ document.addEventListener('DOMContentLoaded', () => {
             }
         }
     });
-
     const todos = loadTodo();
-
     todos.todoList.forEach(todo => {
         appendTodoInHtml(todo);
     });
