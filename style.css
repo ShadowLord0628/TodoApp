@@ -8,6 +8,9 @@
     --btn-edit: #ffd700;
     --btn-completed: #32cd32;
     --btn-delete: #ff6347;
+    --btn-hover-edit: #d7b700;
+    --btn-hover-completed: #00a400;
+    --btn-hover-delete: #c71e00e4;
 }
 
 * {
@@ -65,8 +68,13 @@ h1 {
     -o-border-radius: 5px;
     color: white;
     font-weight:bold;
-    /* Button hover styling */
-    &:hover {
+    transition: background-color 0.3s;
+    -webkit-transition: background-color 0.3s;
+    -moz-transition: background-color 0.3s;
+    -ms-transition: background-color 0.3s;
+    -o-transition: background-color 0.3s;
+    
+    &:hover{
         background-color: var(--btn-primary-hover);
         font-weight: bolder;
         cursor:pointer;
@@ -130,20 +138,37 @@ li {
     -ms-border-radius: 5px;
     -o-border-radius: 5px;
     cursor:pointer;
-    color:white;
+    color:rgb(255, 255, 255);
     font-weight: bold;
+    transition:background-color 0.3s;
+    -webkit-transition:background-color 0.3s;
+    -moz-transition:background-color 0.3s;
+    -ms-transition:background-color 0.3s;
+    -o-transition:background-color 0.3s;
 }
 
 .editBtn {
     background-color: var(--btn-edit);
+    &:hover {
+        background-color: var(--btn-hover-edit);
+        font-weight: bolder;
+    }
 }
 
 .completedBtn {
     background-color: var(--btn-completed);
+    &:hover {
+        background-color: var(--btn-hover-completed);
+        font-weight: bolder;
+    }
 }
 
 .delBtn {
     background-color: var(--btn-delete);
+    &:hover {
+        background-color: var(--btn-hover-delete);
+        font-weight: bolder;
+    }
 }
 
 
@@ -152,4 +177,8 @@ li {
     flex-direction:row;
     justify-content: space-between;
     align-items: center;
+}
+
+.completed {
+    text-decoration: line-through;
 }
