@@ -4,17 +4,27 @@ function loadTodo() {
     return todo;
 }
 
-function addTodoToLocalStorage(text) {
+function addTodoToLocalStorage(todoText) {
     const todo = loadTodo();
-    todo.todoList.push(text);
+    todo.todoList.push({
+        text: todoText,
+        isCompleted: false,
+    }
+    );
     localStorage.setItem("todo", JSON.stringify(todo));
 }
 
-function appendTodoInHtml(text) {
+function appendTodoInHtml(todo) {
     const todoList = document.getElementById('todoList');
     const todoItem = document.createElement('li');
-    todoItem.textContent = text;
+
+    const textDiv = document.createElement("div");
+
+    textDiv.textContent = todo.text;
     todoItem.classList.add('todoItem');
+
+    const wrapper = document.createElement("div");
+    wrapper.classList.add('todoButtons');
 
     const editBtn = document.createElement('button');
     editBtn.textContent = 'Edit';
@@ -28,9 +38,12 @@ function appendTodoInHtml(text) {
     completedBtn.textContent = 'Completed';
     completedBtn.classList.add('completedBtn');
 
-    todoItem.appendChild(editBtn);
-    todoItem.appendChild(delBtn);
-    todoItem.appendChild(completedBtn);
+    wrapper.appendChild(editBtn);
+    wrapper.appendChild(delBtn);
+    wrapper.appendChild(completedBtn);
+
+    todoItem.appendChild(textDiv);
+    todoItem.appendChild(wrapper);
 
     todoList.appendChild(todoItem);
 }
@@ -62,8 +75,13 @@ document.addEventListener('DOMContentLoaded', () => {
             if (text === '') {
                 alert('Please write something for the todo.');
             } else {
-                addTodoToLocalStorage(text);
-                appendTodoInHtml(text);
+
+                const todo = {
+                    text: input.value,
+                    isCompleted: false,
+                }
+                addTodoToLocalStorage(todo);
+                appendTodoInHtml(todo);
                 input.value = '';
             }
         }
@@ -72,8 +90,6 @@ document.addEventListener('DOMContentLoaded', () => {
     const todos = loadTodo();
 
     todos.todoList.forEach(todo => {
-        const newTodoItem = document.createElement("li");
-        newTodoItem.textContent = todo;
-        todoList.appendChild(newTodoItem);
+        appendTodoInHtml(todo);
     });
 });

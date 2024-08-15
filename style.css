@@ -5,6 +5,9 @@
     --btn-secondary: #e1a900;
     --btn-secondary-hover: #4a90e2;
     --btn-primary-hover : #006ee3;
+    --btn-edit: #ffd700;
+    --btn-completed: #32cd32;
+    --btn-delete: #ff6347;
 }
 
 * {
@@ -24,7 +27,7 @@ body {
     margin: 0 auto;
     box-shadow: 0 0 10px rgba(0,0,0, 0.1);
     padding:20px;
-    margin-top:10px;
+    margin-top:20px;
 }
 
 h1 {
@@ -34,6 +37,7 @@ h1 {
 #todoInput {
     width: 75%;
     padding: 10px;
+    margin-left:5px;
     margin-right: 10px;
     border: 2px solid #ddd;
     border-radius: 5px;
@@ -43,8 +47,15 @@ h1 {
     -o-border-radius: 5px;
 }
 
+.wrapInput {
+    display:flex;
+    flex-direction: row;
+    margin-bottom: 8px;
+}
+
 #btn-addTodo {
     padding:10px 20px;
+    margin-left:9px;
     background-color:var(--btn-primary);
     border:none;
     border-radius: 5px;
@@ -108,3 +119,37 @@ li {
     }
 }
 
+.editBtn, .delBtn, .completedBtn {
+    margin: 5px;
+    padding: 10px 15px;
+    background-color: var(--btn-secondary);
+    border: none;
+    border-radius: 5px;
+    -webkit-border-radius: 5px;
+    -moz-border-radius: 5px;
+    -ms-border-radius: 5px;
+    -o-border-radius: 5px;
+    cursor:pointer;
+    color:white;
+    font-weight: bold;
+}
+
+.editBtn {
+    background-color: var(--btn-edit);
+}
+
+.completedBtn {
+    background-color: var(--btn-completed);
+}
+
+.delBtn {
+    background-color: var(--btn-delete);
+}
+
+
+.todoItem {
+    display:flex;
+    flex-direction:row;
+    justify-content: space-between;
+    align-items: center;
+}
